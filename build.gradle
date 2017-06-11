@@ -1,0 +1,45 @@
+buildscript {
+    ext.kotlin_version = '1.1.2-2'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+
+plugins {
+    id "org.jetbrains.intellij" version "0.2.11"
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'idea'
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'java'
+
+intellij {
+    pluginName 'Flyway Toolbox'
+    localPath '/Applications/IntelliJ IDEA CE.app'
+    downloadSources true
+}
+
+dependencies {
+    repositories {
+        mavenCentral()
+    }
+    compile 'mysql:mysql-connector-java:6.0.5'
+    compile "org.flywaydb:flyway-core:4.2.0"
+}
+
+task copyToLib(type: Copy) {
+    into "$buildDir/output/libs"
+    from configurations.runtime
+}
+
+build.dependsOn(copyToLib)
+
+group 'com.alexfacciorusso'
+version '1.0a' // Plugin version

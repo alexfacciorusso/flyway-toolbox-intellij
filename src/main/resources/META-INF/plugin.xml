@@ -1,0 +1,63 @@
+<idea-plugin>
+    <id>com.alexfacciorusso.flywaytoolbox</id>
+    <name>Flyway Toolbox</name>
+    <version>1.0</version>
+    <vendor email="alexfacciorusso93@gmail.com">Alex Facciorusso</vendor>
+
+    <description><![CDATA[
+      Enter short description for your plugin here.<br>
+      <em>most HTML tags may be used</em>
+    ]]></description>
+
+    <change-notes><![CDATA[
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>
+    ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="145.0"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <project-components>
+        <component>
+            <implementation-class>com.alexfacciorusso.flywaytoolbox.FlywayProjectComponent</implementation-class>
+            <loadForDefaultProject/>
+            <option name="workspace" value="true"/>
+        </component>
+    </project-components>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!--TODO
+        <toolWindow id="FlywayToolbox.FlywayToolWindow" anchor="bottom"
+                    factoryClass="com.alexfacciorusso.flywaytoolbox.FlywayToolboxToolWindowFactory"
+                    secondary="false"
+                    icon="/icons/flywayLogo.png"
+        />
+        -->
+        <projectService id="FlywayToolbox.FlywayProjectService"
+                        serviceImplementation="com.alexfacciorusso.flywaytoolbox.FlywayService"/>
+    </extensions>
+
+    <actions>
+        <action id="FlywayToolbox.NewFlywayMigrationFileAction"
+                class="com.alexfacciorusso.flywaytoolbox.NewFlywayMigrationFileAction"
+                text="New Flyway migration" icon="/icons/flywayLogo.png">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+        <group text="Flyway" icon="/icons/flywayLogo.png" popup="true" keep-content="true">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+
+            <action text="_Info" class="com.alexfacciorusso.flywaytoolbox.FlywayInfoAction"
+                    id="FlywayToolsInfoAction" description="Get informations about the current state of db."/>
+            <action text="_Info" class="com.alexfacciorusso.flywaytoolbox.FlywayCleanAction"
+                    id="FlywayToolsCleanAction" description="Clean the current db."/>
+        </group>
+    </actions>
+
+</idea-plugin>
