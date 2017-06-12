@@ -14,6 +14,10 @@ class FlywayService(val project: Project) {
     val flywayConfFilename = "flyway.conf"
     var hasConfiguration = false
 
+    init {
+        update()
+    }
+
     fun update() {
         val flywayConfFile = project.baseDir.findChild(flywayConfFilename)
         if (flywayConfFile != null && flywayConfFile.exists()) {

@@ -1,6 +1,5 @@
 package com.alexfacciorusso.flywaytoolbox
 
-import com.intellij.notification.NotificationType
 import com.intellij.openapi.components.ProjectComponent
 import com.intellij.openapi.components.ServiceManager
 import com.intellij.openapi.project.Project
@@ -19,7 +18,6 @@ class FlywayProjectComponent(val project: Project) : ProjectComponent {
             override fun after(events: MutableList<out VFileEvent>) {
                 val flywayService = ServiceManager.getService(project, FlywayService::class.java)
                 flywayService?.update()
-                flywayNotification("Updated flyway.conf", NotificationType.WARNING, project)
             }
         })
     }
@@ -32,9 +30,5 @@ class FlywayProjectComponent(val project: Project) : ProjectComponent {
 
     override fun initComponent() {}
 
-    override fun projectOpened() {
-        val flywayService = ServiceManager.getService(FlywayService::class.java) ?: return
-        flywayService.update()
-        flywayNotification("Updated project", NotificationType.WARNING, project)
-    }
+    override fun projectOpened() {}
 }

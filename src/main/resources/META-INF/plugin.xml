@@ -47,15 +47,15 @@
     <actions>
         <action id="FlywayToolbox.NewFlywayMigrationFileAction"
                 class="com.alexfacciorusso.flywaytoolbox.NewFlywayMigrationFileAction"
-                text="New Flyway migration" icon="/icons/flywayLogo.png">
+                text="Flyway migration" icon="/icons/flywayLogo.png">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </action>
         <group text="Flyway" icon="/icons/flywayLogo.png" popup="true" keep-content="true">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
 
             <action text="_Info" class="com.alexfacciorusso.flywaytoolbox.FlywayInfoAction"
                     id="FlywayToolsInfoAction" description="Get informations about the current state of db."/>
-            <action text="_Info" class="com.alexfacciorusso.flywaytoolbox.FlywayCleanAction"
+            <action text="_Clean" class="com.alexfacciorusso.flywaytoolbox.FlywayCleanAction"
                     id="FlywayToolsCleanAction" description="Clean the current db."/>
         </group>
     </actions>
